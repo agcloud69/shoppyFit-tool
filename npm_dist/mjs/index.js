@@ -78,15 +78,15 @@ function shoppyfit_init() {
         return;
     }
     // get all placeholders
-    const shoppyfituttons = document.querySelectorAll('.shoppyfit');
+    const shoppyfitButtons = document.querySelectorAll('.shoppyfit');
     // if there are some, move on
-    if (shoppyfituttons.length > 0) {
+    if (shoppyfitButtons.length > 0) {
         // get the amount of already initialized ones first
-        const shoppyfituttonsInitialized = document.querySelectorAll('.shoppyfit-initialized');
+        const shoppyfitButtonsInitialized = document.querySelectorAll('.shoppyfit-initialized');
         // generate the buttons one by one
-        for (let i = 0; i < shoppyfituttons.length; i++) {
+        for (let i = 0; i < shoppyfitButtons.length; i++) {
             // skip already initialized ones
-            if (shoppyfituttons[parseInt(i)].classList.contains('shoppyfit-initialized')) {
+            if (shoppyfitButtons[parseInt(i)].classList.contains('shoppyfit-initialized')) {
                 continue;
             }
             // get JSON from HTML block, but remove real code line breaks before parsing.
@@ -95,7 +95,7 @@ function shoppyfit_init() {
                 try {
                     return JSON.parse(
                         shoppyfit_secure_content(
-                            shoppyfituttons[parseInt(i)].innerHTML.replace(/(\r\n|\n|\r)/g, ''),
+                            shoppyfitButtons[parseInt(i)].innerHTML.replace(/(\r\n|\n|\r)/g, ''),
                             false
                         )
                     );
@@ -118,12 +118,12 @@ function shoppyfit_init() {
                 const shoppyfitConfig = shoppyfit_decorate_data(shoppyfitJsonInputPatched);
                 // set identifier
                 if (shoppyfitConfig.identifier == null || shoppyfitConfig.identifier == '') {
-                    shoppyfitConfig.identifier = 'shoppyfit-btn-' + (i + shoppyfituttonsInitialized.length + 1);
+                    shoppyfitConfig.identifier = 'shoppyfit-btn-' + (i + shoppyfitButtonsInitialized.length + 1);
                 }
                 // validate the config (JSON iput) ...
                 if (shoppyfit_validate(shoppyfitConfig)) {
                     // ... and generate the button on success
-                    shoppyfit_generate(shoppyfituttons[parseInt(i)], shoppyfitConfig);
+                    shoppyfit_generate(shoppyfitButtons[parseInt(i)], shoppyfitConfig);
                 }
             }
         }
