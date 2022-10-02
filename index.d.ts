@@ -1,29 +1,29 @@
-declare module 'add-to-calendar-button' {
-  export function atcb_init(): void;
-  export function atcb_action(
+declare module 'shoppyfit-tool' {
+  export function shoppyfit_init(): void;
+  export function shoppyfit_action(
     config: {
       name: string;
       description?: string;
-      startDate: string;
-      startTime?: string;
-      endDate?: string;
-      endTime?: string;
-      location?: string;
-      icsFile?: string;
+      // startDate: string;
+      // startTime?: string;
+      // endDate?: string;
+      // endTime?: string;
+      // location?: string;
+      // icsFile?: string;
       images?: string[];
       recurrence?: string;
       recurrence_interval?: bigint;
-      recurrence_until?: string;
-      recurrence_count?: string;
-      recurrence_byDay?: string;
-      recurrence_byMonth?: string;
-      recurrence_byMonthDay?: string;
-      recurrence_weekstart?: string;
+      // recurrence_until?: string;
+      // recurrence_count?: string;
+      // recurrence_byDay?: string;
+      // recurrence_byMonth?: string;
+      // recurrence_byMonthDay?: string;
+      // recurrence_weekstart?: string;
       sequence?: bigint;
       identifier?: string;
-      options: ('Apple' | 'Google' | 'iCal' | 'Microsoft365' | 'MicrosoftTeams' | 'Outlook.com' | 'Yahoo')[];
-      iCalFileName?: string;
-      timeZone?: string;
+      options: ('step1' | 'step2' | ' ')[];
+      // iCalFileName?: string;
+      // timeZone?: string;
       trigger?: 'hover' | 'click';
       listStyle?: 'dropdown' | 'dropdown-static' | 'overlay' | 'modal';
       background?: boolean;
