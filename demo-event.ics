@@ -1,9 +1,9 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-// github.com/add2cal/add-to-calendar-button // atcb v1.10.1 //EN
+PRODID:-// github.com/agcloud69/shoppyfit-tool // shoppyfit v1.0.0 //EN
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-UID:2022-07-13T17:17:04.106Z@add-to-calendar-button
+UID:2022-07-13T17:17:04.106Z@shoppyfit-tool
 DTSTAMP:20220114
 DTSTART;VALUE=DATE:20220114
 DTEND;VALUE=DATE:20220119
