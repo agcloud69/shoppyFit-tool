@@ -79,7 +79,6 @@
         <hr>
         <h3> Customizing Labels</h3>
         <p class="description">
-            You can customize the button text as well as each option label.<br> Here, we also set the listStyle to an overlay list, enlarge the size, as well as removed the custom iCal/ics name and explicitly set a static downloadable ics file instead.<br>
         </p>
         <div class="example">
             <div class="example-left">
@@ -98,10 +97,9 @@
 
 
 
-        <h3> Click Trigger</h3>
+        <h3> Click </h3>
         <p class="description">
-            Per default, the options unfold on hover, when you are on a desktop device.<br> You can opt for triggering on click, if you want to. Mind that on touch devices, of course, it will be always on tap.<br>
-            <em>In this example, it is also included with the inline option and the modal option (which prevents the dropdown).</em>
+
         </p>
         <div class="example">
             <div class="example-left">
@@ -109,8 +107,7 @@
                 <!-- start of button code -->
                 <span style="padding:5px;">Do it! &#8594;</span>
                 <div class="shoppyfit" style="display:none;">
-                    { "name":"Reminder to star the Find Size button repo", "description":"Check out the maybe easiest way to include Find Size buttons to your website at:<br>&#8594; ", "label":"Click me hard!", "options":[ "step1","step2"], "inline":true,
-                    "trigger":"click", "listStyle":"modal" }
+                    { "name":"Reminder to star the Find Size button", "description":" ", "label":"Click me hard!", "options":[ "step1","step2"], "inline":true, "trigger":"click", "listStyle":"modal" }
                 </div>
                 <!-- end of button code -->
 
@@ -121,9 +118,8 @@
         <hr>
 
 
-        <h3> Bring-Your-Own Button</h3>
+        <h3> My-Own Button</h3>
         <p class="description">
-            If you can't or don't want to use "shoppyfit_init", you can use the "shoppyfit_action" function and apply it to your own button.
         </p>
         <div class="example">
             <div class="example-left">
@@ -135,7 +131,7 @@
                 <script type="application/javascript">
                     const config = {
                         name: "Reminder to star the Find Size button repo",
-                        description: "Check out the maybe easiest way to include Find Size buttons to your website at:<br>&#8594;",
+                        description: "",
                         options: ["step1"],
                         trigger: "click",
                     };
