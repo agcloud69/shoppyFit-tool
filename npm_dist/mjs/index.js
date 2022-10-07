@@ -49,7 +49,6 @@ const isProblematicWebView = isBrowser() ?
 
 // DEFINE GLOBAL VARIABLES
 const shoppyfitDefaultTarget = isWebView() ? '_system' : '_blank';
-const shoppyfitOptions = ['step1', 'step2', ''];
 
 // DEFINING GLOBAL ICONS
 const shoppyfitIcon = {
@@ -219,15 +218,15 @@ function shoppyfit_check_required(data) {
 // VALIDATE THE INPUT DATA
 function shoppyfit_validate(data) {
     // validate options
-    if (!data.options.every(function(option) {
-            if (!shoppyfitOptions.includes(option)) {
-                console.error(msgPrefix + ' failed: invalid option [' + option + ']');
-                return false;
-            }
-            return true;
-        })) {
-        return false;
-    }
+    // if (!data.options.every(function(option) {
+    //         if (!shoppyfitOptions.includes(option)) {
+    //             console.error(msgPrefix + ' failed: invalid option [' + option + ']');
+    //             return false;
+    //         }
+    //         return true;
+    //     })) {
+    //     return false;
+    // }
 
     // on passing the validation, return true
     return true;
@@ -237,7 +236,6 @@ function shoppyfit_validate(data) {
 // helper function to generate the labels for the button and list options
 function shoppyfit_generate_label(data, parent, type, icon = false, text = '', oneOption = false) {
     let defaultTriggerText = shoppyfit_translate_hook('Find Size', data.language, data);
-    // if there is only 1 option, we use the trigger text on the option label. Therefore, forcing it here
     if (oneOption && text == '') {
         text = defaultTriggerText;
     }
@@ -275,18 +273,6 @@ function shoppyfit_generate_label(data, parent, type, icon = false, text = '', o
             );
             parent.id = data.identifier + '-apple';
             text = text || 'Apple';
-            break;
-
-        case 'step1':
-            parent.addEventListener(
-                'click',
-                shoppyfit_debounce(() => {
-                    oneOption ? parent.blur() : shoppyfit_toggle('close');
-                    // shoppyfit_generate_google(data);
-                })
-            );
-            parent.id = data.identifier + '-step 1';
-            text = text || 'step1';
             break;
 
         case 'close':
@@ -368,18 +354,9 @@ function shoppyfit_generate(button, data) {
     }
     buttonTrigger.type = 'button';
     buttonTriggerWrapper.appendChild(buttonTrigger);
-    // generate the label incl. eventListeners
-    // if there is only 1 calendar option, we directly show this at the button, but with the trigger's label text
-    if (data.options.length === 0) {
-        buttonTrigger.classList.add('shoppyfit-single');
-        shoppyfit_generate_label(data, buttonTrigger, data.options[0], true, data.label, true);
-    } else {
-        shoppyfit_generate_label(data, buttonTrigger, 'trigger', true, data.label);
-        // create an empty anchor div to place the dropdown, while the position can be defined via CSS
-        const buttonDropdownAnchor = document.createElement('div');
-        buttonDropdownAnchor.classList.add('shoppyfit-dropdown-anchor');
-        buttonTrigger.appendChild(buttonDropdownAnchor);
-    }
+    shoppyfit_generate_label(data, buttonTrigger, 'trigger', true, data.label);
+    // create an empty anchor div to place the dropdown, while the position can be defined via CSS
+
     // update the placeholder class to prevent multiple initializations
     button.classList.remove('shoppyfit');
     button.classList.add('shoppyfit-initialized');
@@ -393,8 +370,8 @@ function shoppyfit_generate(button, data) {
     console.log('Find Size button "' + data.identifier + '" created');
 }
 
-// generate the dropdown list (can also appear wihtin a modal, if option is set)
-function shoppyfit_generate_dropdown_list(data) {
+// generate the  list (can also appear wihtin a modal, if option is set)
+function shoppyfit_generate_list(data) {
     const optionsList = document.createElement('iframe');
     optionsList.classList.add('shoppyfit-list');
     optionsList.classList.add('shoppyfit-' + data.lightMode);
@@ -402,30 +379,10 @@ function shoppyfit_generate_dropdown_list(data) {
         optionsList.classList.add('shoppyfit-rtl');
     }
     optionsList.style.fontSize = data.size + 'px';
-    // generate the list items
-    // let listCount = 0;
-    // data.options.forEach(function(option) {
-    //     const optionItem = document.createElement('iframe');
-    //     optionItem.classList.add('shoppyfit-iframe');
-    //     optionItem.tabIndex = 0;
-    //     listCount++;
-    //     optionItem.dataset.optionNumber = listCount;
-    //     optionsList.appendChild(optionItem);
-    //     // generate the label incl. individual eventListener
-    //     shoppyfit_generate_label(data, optionItem, option, true, data.optionLabels[listCount - 1]);
-    // });
-    // in the modal case, we also render a close option
-    // if (data.listStyle === 'modal') {
-    //     const optionItem = document.createElement('iframe');
-    //     optionItem.classList.add('shoppyfit-iframe');
-    //     optionItem.tabIndex = 0;
-    //     optionsList.appendChild(optionItem);
-    //     shoppyfit_generate_label(data, optionItem, 'close', true);
-    // }
+
     return optionsList;
 }
 
-function shoppyfit_generate_modal_step(data) {}
 // create the background overlay, which also acts as trigger to close any dropdowns
 function shoppyfit_generate_bg_overlay(
     listStyle = 'dropdown',
@@ -507,10 +464,10 @@ function shoppyfit_toggle(action, data = '', button = '', keyboardTrigger = fals
 
 // show the modal list + background overlay
 function shoppyfit_open(data, button, keyboardTrigger = false, generatedButton = false) {
-    // abort early if an Find Size dropdown or modal already opened
-    if (document.querySelector('.shoppyfit-list') || document.querySelector('.shoppyfit-modal')) return;
+    // abort early if an Find Size  modal already opened
+    if (document.querySelector('.shoppyfit-modal')) return;
     // generate list and prepare wrapper
-    const list = shoppyfit_generate_dropdown_list(data);
+    const list = shoppyfit_generate_list(data);
 
     const listWrapper = document.createElement('div');
     listWrapper.classList.add('shoppyfit-list-wrapper');
@@ -521,8 +478,6 @@ function shoppyfit_open(data, button, keyboardTrigger = false, generatedButton =
             button.classList.add('shoppyfit-modal-style');
             list.classList.add('shoppyfit-modal');
         } else {
-            listWrapper.appendChild(list);
-            listWrapper.classList.add('shoppyfit-dropdown');
             if (data.listStyle === 'overlay') {
                 listWrapper.classList.add('shoppyfit-dropoverlay');
             }
@@ -550,15 +505,7 @@ function shoppyfit_open(data, button, keyboardTrigger = false, generatedButton =
         listWrapper.appendChild(list);
         listWrapper.classList.add('shoppyfit-style-' + data.buttonStyle);
         document.body.appendChild(bgOverlay);
-        // if (data.listStyle === 'dropdown-static') {
-        //     // in the dropdown-static case, we do not dynamically adjust whether we show the dropdown upwards
-        //     shoppyfit_position_list(button, listWrapper, true);
-        // } else {
-        //     shoppyfit_position_list(button, listWrapper);
-        // }
     }
-    // set overlay size just to be sure
-    // shoppyfit_set_fullsize(bgOverlay);
     // give keyboard focus to first item in list, if not blocked, because there is definitely no keyboard trigger
     if (keyboardTrigger) {
         list.firstChild.focus();
@@ -588,7 +535,6 @@ function shoppyfit_close(keyboardTrigger = false) {
     // document.body.classList.remove('shoppyfit-modal-no-scroll');
     // remove dropdowns, modals, and bg overlays (should only be one of each at max)
     Array.from(document.querySelectorAll('.shoppyfit-list-wrapper'))
-        .concat(Array.from(document.querySelectorAll('.shoppyfit-list')))
         .concat(Array.from(document.querySelectorAll('.shoppyfit-info-modal')))
         .concat(Array.from(document.querySelectorAll('#shoppyfit-bgoverlay')))
         .forEach((el) => el.remove());
@@ -875,52 +821,14 @@ if (isBrowser()) {
             }
         })
     );
-    // global listener to arrow key optionlist navigation
-    document.addEventListener('keydown', (event) => {
-        if (
-            document.querySelector('.shoppyfit-list') &&
-            (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Tab')
-        ) {
-            let targetFocus = 0;
-            let currFocusOption = document.activeElement;
-            const optionListCount = document.querySelectorAll('.shoppyfit-iframe').length;
-            if (currFocusOption.classList.contains('shoppyfit-iframe')) {
-                if (event.key === 'ArrowDown' && currFocusOption.dataset.optionNumber < optionListCount) {
-                    event.preventDefault();
-                    targetFocus = parseInt(currFocusOption.dataset.optionNumber) + 1;
-                } else if (event.key === 'ArrowUp' && currFocusOption.dataset.optionNumber >= 1) {
-                    event.preventDefault();
-                    targetFocus = parseInt(currFocusOption.dataset.optionNumber) - 1;
-                }
-                if (targetFocus > 0) {
-                    document.querySelector('.shoppyfit-iframe[data-option-number="' + targetFocus + '"]').focus();
-                }
-            } else {
-                event.preventDefault();
-                if (
-                    document.querySelector('.shoppyfit-list-wrapper.shoppyfit-dropup') &&
-                    (event.key === 'ArrowDown' || event.key === 'ArrowUp')
-                ) {
-                    document.querySelector('.shoppyfit-iframe[data-option-number="' + optionListCount + '"]').focus();
-                } else {
-                    document.querySelector('.shoppyfit-iframe[data-option-number="1"]').focus();
-                }
-            }
-        }
-    });
+
     // Global listener to any screen changes
     window.addEventListener(
         'resize',
         shoppyfit_throttle(() => {
             const activeOverlay = document.getElementById('shoppyfit-bgoverlay');
-            // if (activeOverlay != null) {
-            //     shoppyfit_set_fullsize(activeOverlay);
-            // }
+
             const activeButton = document.querySelector('.shoppyfit-active');
-            const activeList = document.querySelector('.shoppyfit-dropdown');
-            // if (activeButton != null && activeList != null) {
-            //     shoppyfit_position_list(activeButton, activeList, false, true);
-            // }
         })
     );
 }
