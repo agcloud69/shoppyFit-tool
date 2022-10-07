@@ -205,7 +205,7 @@ body.shoppyfit-dark #shoppyfit-bgoverlay.shoppyfit-bodyScheme {
     width: 100%;
 }
 
-.shoppyfit-list-item {
+.shoppyfit-iframe {
     align-items: center;
     background-color: var(--shoppyfit-background);
     border: 1px solid var(--shoppyfit-border);
@@ -221,17 +221,17 @@ body.shoppyfit-dark #shoppyfit-bgoverlay.shoppyfit-bodyScheme {
     -webkit-tap-highlight-color: transparent;
 }
 
-.shoppyfit-rtl .shoppyfit-list-item {
+.shoppyfit-rtl .shoppyfit-iframe {
     direction: rtl;
     text-align: right;
 }
 
-.shoppyfit-list-item:hover {
+.shoppyfit-iframe:hover {
     background-color: var(--shoppyfit-background-2);
     color: var(--shoppyfit-text-2);
 }
 
-.shoppyfit-list-item:focus-visible {
+.shoppyfit-iframe:focus-visible {
     background-color: var(--shoppyfit-background-2);
     color: var(--shoppyfit-keyboard-focus);
     font-size: .95em;
@@ -239,36 +239,36 @@ body.shoppyfit-dark #shoppyfit-bgoverlay.shoppyfit-bodyScheme {
     outline: none;
 }
 
-.shoppyfit-list-item:last-child {
+.shoppyfit-iframe:last-child {
     border-radius: 0 0 6px 6px;
 }
 
-.shoppyfit-list .shoppyfit-list-item:not(:first-child) {
+.shoppyfit-list .shoppyfit-iframe:not(:first-child) {
     border-top-style: none;
 }
 
-.shoppyfit-dropup .shoppyfit-list-item:last-child {
+.shoppyfit-dropup .shoppyfit-iframe:last-child {
     border-radius: 0;
     padding-bottom: 1.25em;
 }
 
-.shoppyfit-dropup .shoppyfit-list-item:first-child,
-.shoppyfit-dropoverlay .shoppyfit-list .shoppyfit-list-item:first-child,
-.shoppyfit-list.shoppyfit-modal .shoppyfit-list-item:first-child {
+.shoppyfit-dropup .shoppyfit-iframe:first-child,
+.shoppyfit-dropoverlay .shoppyfit-list .shoppyfit-iframe:first-child,
+.shoppyfit-list.shoppyfit-modal .shoppyfit-iframe:first-child {
     border-radius: 6px 6px 0 0;
 }
 
-.shoppyfit-dropoverlay .shoppyfit-list .shoppyfit-list-item:only-child,
-.shoppyfit-list.shoppyfit-modal .shoppyfit-list-item:only-child {
+.shoppyfit-dropoverlay .shoppyfit-list .shoppyfit-iframe:only-child,
+.shoppyfit-list.shoppyfit-modal .shoppyfit-iframe:only-child {
     border-radius: 6px;
 }
 
-.shoppyfit-list.shoppyfit-generated-button:not(.shoppyfit-modal) .shoppyfit-list-item:first-child {
+.shoppyfit-list.shoppyfit-generated-button:not(.shoppyfit-modal) .shoppyfit-iframe:first-child {
     padding-top: 1.25em;
 }
 
-.shoppyfit-dropup .shoppyfit-list.shoppyfit-generated-button:not(.shoppyfit-modal) .shoppyfit-list-item:first-child,
-.shoppyfit-dropoverlay .shoppyfit-list.shoppyfit-generated-button:not(.shoppyfit-modal) .shoppyfit-list-item:first-child {
+.shoppyfit-dropup .shoppyfit-list.shoppyfit-generated-button:not(.shoppyfit-modal) .shoppyfit-iframe:first-child,
+.shoppyfit-dropoverlay .shoppyfit-list.shoppyfit-generated-button:not(.shoppyfit-modal) .shoppyfit-iframe:first-child {
     padding-top: .8em;
 }
 
@@ -281,26 +281,26 @@ body.shoppyfit-dark #shoppyfit-bgoverlay.shoppyfit-bodyScheme {
     box-shadow: var(--shoppyfit-shadow-list-modal);
 }
 
-.shoppyfit-list-item .shoppyfit-icon {
+.shoppyfit-iframe .shoppyfit-icon {
     margin-bottom: .5em;
     margin-right: .6em;
     width: 1.125em;
 }
 
-.shoppyfit-rtl .shoppyfit-list-item .shoppyfit-icon {
+.shoppyfit-rtl .shoppyfit-iframe .shoppyfit-icon {
     margin-right: 0;
     margin-left: .6em;
 }
 
-.shoppyfit-list-item-close {
+.shoppyfit-iframe-close {
     background-color: var(--shoppyfit-close-background);
 }
 
-.shoppyfit-list-item.shoppyfit-list-item-close {
+.shoppyfit-iframe.shoppyfit-iframe-close {
     color: var(--shoppyfit-close-text);
 }
 
-.shoppyfit-list-item-close svg {
+.shoppyfit-iframe-close svg {
     fill: currentcolor;
 }
 
@@ -320,10 +320,13 @@ body.shoppyfit-dark #shoppyfit-bgoverlay.shoppyfit-bodyScheme {
 
 .shoppyfit-modal {
     display: block;
-    margin: auto;
+    /* background-color: var(--shoppyfit-background-2); */
+    /* margin: auto; */
     min-width: 250px;
+    min-height: 80%;
     width: auto;
-    position: relative;
+    right: 0;
+    position: fixed;
     z-index: 14000090;
 }
 
@@ -473,23 +476,23 @@ a.shoppyfit-modal-btn:focus-visible {
  */
 
 #shoppyfit-bgoverlay {
-    animation: shoppyfit-bgoverlay-animate 0.1s ease 0s 1 normal forwards;
+    /* animation: shoppyfit-bgoverlay-animate 0.1s ease 0s 1 normal forwards;
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
     background-color: var(--shoppyfit-overlay-background);
-    box-sizing: border-box;
+    box-sizing: border-box; */
     display: flex;
     /* could become simply 100dvh in the future - with regular padding then */
     height: calc(100vh + 100px);
-    left: 0;
     right: 0;
     top: 0;
     min-height: 100%;
     min-width: 100%;
-    opacity: 0;
+    /* opacity: 0; */
     overflow-y: auto;
     padding: 30px 20px 130px;
     position: fixed;
+    transition: 0.5s;
     width: 100vw;
     z-index: 14000000;
 }

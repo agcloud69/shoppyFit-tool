@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
+
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -59,16 +60,14 @@
 
     <div class="container">
 
-        <h3>The usual One</h3>
-        <p class="description">
-            This is a more or less standard setup with all available calendar types, a custom iCal/ics file name and a time zone set.
-        </p>
+        <h3>ShoppyFit Button</h3>
+
         <div class="example">
             <div class="example-left">
 
                 <!-- start of button code -->
                 <div class="shoppyfit" style="display:none;">
-                    { "name":"Reminder to star the Find Size button repo", "description":"descß", "inline":true, "trigger":"click", "listStyle":"modal","options":[ "step1","step2" ] }
+                    { "name":"Reminder to star the Find Size button repo", "description":"desc", "inline":true, "trigger":"click", "listStyle":"modal","options":[ "step1" ] }
                 </div>
                 <!-- end of button code -->
 
@@ -76,80 +75,9 @@
 
         </div>
 
-        <hr>
-        <h3> Customizing Labels</h3>
-        <p class="description">
-        </p>
-        <div class="example">
-            <div class="example-left">
 
-                <!-- start of button code -->
-                <div class="shoppyfit" style="display:none;">
-                    { "name":"Find Size button ", "description":"Check ", "label":"Hit me to save!", "options":[ "step2" ], "icsFile":"https://add-to-calendar-button.com/demo-event.ics", "listStyle":"overlay","trigger":"click", "size":"8" }
-                </div>
-                <!-- end of button code -->
-
-            </div>
-
-        </div>
 
         <hr>
-
-
-
-        <h3> Click </h3>
-        <p class="description">
-
-        </p>
-        <div class="example">
-            <div class="example-left">
-
-                <!-- start of button code -->
-                <span style="padding:5px;">Do it! &#8594;</span>
-                <div class="shoppyfit" style="display:none;">
-                    { "name":"Reminder to star the Find Size button", "description":" ", "label":"Click me hard!", "options":[ "step1","step2"], "inline":true, "trigger":"click", "listStyle":"modal" }
-                </div>
-                <!-- end of button code -->
-
-            </div>
-
-        </div>
-
-        <hr>
-
-
-        <h3> My-Own Button</h3>
-        <p class="description">
-        </p>
-        <div class="example">
-            <div class="example-left">
-
-                <!-- start of button code -->
-                <button id="default-button">
-            Find Size
-          </button>
-                <script type="application/javascript">
-                    const config = {
-                        name: "Reminder to star the Find Size button repo",
-                        description: "",
-                        options: ["step1"],
-                        trigger: "click",
-                    };
-                    const button = document.querySelector('#default-button');
-                    button.addEventListener('click', () => shoppyfit_action(config, button));
-                </script>
-                <!-- end of button code -->
-
-            </div>
-
-        </div>
-
-        <hr>
-
-
-
-
-
 
         <div id="legal">
             <button id="light-mode-switch-footer" class="light-mode-switch" aria-label="Light/Dark Mode Switch">
@@ -165,6 +93,7 @@
     <!-- load the button js and more -->
     <script type="application/javascript" src="./demo_assets/js/demopage.min.js?v=1.0.0" defer></script>
     <script type="application/javascript" src="./dist/shoppyfit.min.js?v=1.0.0" async defer></script>
+
 
 </body>
 
