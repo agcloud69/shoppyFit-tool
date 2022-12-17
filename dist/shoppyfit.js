@@ -168,26 +168,26 @@ function shoppyfit_decorate_data(data) {
         data.size = 16;
     }
     // determine dark mode
-    if (data.lightMode == null || data.lightMode == '') {
-        data.lightMode = 'light';
-    } else if (data.lightMode != null && data.lightMode != '') {
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-        switch (data.lightMode) {
-            case 'system':
-                if (prefersDarkScheme.matches) {
-                    data.lightMode = 'dark';
-                } else {
-                    data.lightMode = 'light';
-                }
-                break;
-            case 'bodyScheme':
-            case 'dark':
-                break;
-            default:
-                data.lightMode = 'light';
-                break;
-        }
-    }
+    // if (data.lightMode == null || data.lightMode == '') {
+    //     data.lightMode = 'light';
+    // } else if (data.lightMode != null && data.lightMode != '') {
+    //     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    //     switch (data.lightMode) {
+    //         case 'system':
+    //             if (prefersDarkScheme.matches) {
+    //                 data.lightMode = 'dark';
+    //             } else {
+    //                 data.lightMode = 'light';
+    //             }
+    //             break;
+    //         case 'bodyScheme':
+    //         case 'dark':
+    //             break;
+    //         default:
+    //             data.lightMode = 'light';
+    //             break;
+    //     }
+    // }
     // set language if not set
     if (data.language == null || data.language == '') {
         data.language = 'en';
@@ -373,11 +373,14 @@ function shoppyfit_generate(button, data) {
 // generate the  list (can also appear wihtin a modal, if option is set)
 function shoppyfit_generate_list(data) {
     const optionsList = document.createElement('iframe');
+    optionsList.setAttribute("id","shoppyFit-iframe")
     optionsList.classList.add('shoppyfit-list');
     optionsList.classList.add('shoppyfit-' + data.lightMode);
     if (data.rtl) {
         optionsList.classList.add('shoppyfit-rtl');
     }
+    optionsList.setAttribute("src","http://localhost:3000/");
+
     optionsList.style.fontSize = data.size + 'px';
 
     return optionsList;

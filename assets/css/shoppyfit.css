@@ -322,10 +322,11 @@ body.shoppyfit-dark #shoppyfit-bgoverlay.shoppyfit-bodyScheme {
     display: block;
     /* background-color: var(--shoppyfit-background-2); */
     /* margin: auto; */
-    min-width: 250px;
-    min-height: 80%;
+    min-width: 400px;
+    min-height: 100%;
     width: auto;
     right: 0;
+    top:0;
     position: fixed;
     z-index: 14000090;
 }

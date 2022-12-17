@@ -305,7 +305,7 @@ body.shoppyfit-dark #shoppyfit-bgoverlay.shoppyfit-bodyScheme {
 
 .shoppyfit-modal {
     display: block;
-    background-color: var(--shoppyfit-background-2);
+    /* background-color: var(--shoppyfit-background-2); */
     /* margin: auto; */
     min-width: 250px;
     min-height: 80%;
